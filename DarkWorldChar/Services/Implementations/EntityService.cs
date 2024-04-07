@@ -48,6 +48,13 @@ namespace DarkWorldChar.Services.Implementations
 
 		public async Task DeleteEntity(string code)
 		{
+			var existingEntity = await ReadEntity(code);
+			if (existingEntity == null)
+			{
+				throw new GlobalApplicationException(
+					$"There is no entity with code - {code}",
+					StatusCodes.Status400BadRequest);
+			}
 			await m_repository.DeleteEntity(code);
 		}
 
