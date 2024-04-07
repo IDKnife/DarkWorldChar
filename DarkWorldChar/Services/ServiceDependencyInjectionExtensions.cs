@@ -12,6 +12,7 @@ namespace DarkWorldChar.Services
 			services.AddScoped<IEntityService<Breed>, EntityService<Breed>>();
 			services.AddScoped<IEntityService<Tribe>, EntityService<Tribe>>();
 			services.AddScoped<IEntityService<Auspice>, EntityService<Auspice>>();
+			services.AddScoped<IEntityService<Nature>, EntityService<Nature>>();
 			services.AddScoped<ILocalizationService, LocalizationService>();
 
 			return services;

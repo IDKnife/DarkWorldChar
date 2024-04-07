@@ -12,6 +12,7 @@ namespace DarkWorldChar.Repositories
 			services.AddScoped<IRepository<Breed>, EntityRepository<Breed>>();
 			services.AddScoped<IRepository<Tribe>, EntityRepository<Tribe>>();
 			services.AddScoped<IRepository<Auspice>, EntityRepository<Auspice>>();
+			services.AddScoped<IRepository<Nature>, EntityRepository<Nature>>();
 			services.AddScoped<ILocalizationRepository, LocalizationRepository>();
 
 			return services;

@@ -18,7 +18,8 @@ namespace DarkWorldChar.Services.Interfaces
 			ILocalizationRepository repository,
 			IEntityService<Auspice> auspiceService,
 			IEntityService<Breed> breedService,
-			IEntityService<Tribe> tribeService)
+			IEntityService<Tribe> tribeService,
+			IEntityService<Nature> natureService)
 		{
 			m_repository = repository;
 			m_entityServices = new List<Func<string, Entity>>()
@@ -26,6 +27,7 @@ namespace DarkWorldChar.Services.Interfaces
 				(string code) => auspiceService.ReadEntity(code).Result,
 				(string code) => breedService.ReadEntity(code).Result,
 				(string code) => tribeService.ReadEntity(code).Result,
+				(string code) => natureService.ReadEntity(code).Result,
 			};
 		}
 
