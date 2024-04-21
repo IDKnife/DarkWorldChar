@@ -26,35 +26,66 @@ namespace DarkWorldChar.Services.Implementations
 			};
 		}
 
-		public void Validate(Character characterInput)
+		public void Validate(Character character)
 		{
-			ValidateStepOne(characterInput);
+			ValidateStepOne(character.Concept);
+			ValidateStepTwo(character.Attributes);
 		}
 
-		private void ValidateStepOne(Character characterInput)
+		private void ValidateStepOne(Concept concept)
 		{
-			if (m_entityServices[nameof(characterInput.Auspice)](characterInput.Auspice) == null)
+			if (m_entityServices[nameof(concept.Auspice)](concept.Auspice) == null)
 			{
 				throw new GlobalApplicationException(
-					$"There isn't auspice - {characterInput.Auspice}",
+					$"There isn't auspice - {concept.Auspice}",
 					StatusCodes.Status400BadRequest);
 			}
-			if (m_entityServices[nameof(characterInput.Breed)](characterInput.Breed) == null)
+			if (m_entityServices[nameof(concept.Breed)](concept.Breed) == null)
 			{
 				throw new GlobalApplicationException(
-					$"There isn't breed - {characterInput.Breed}",
+					$"There isn't breed - {concept.Breed}",
 					StatusCodes.Status400BadRequest);
 			}
-			if (m_entityServices[nameof(characterInput.Tribe)](characterInput.Tribe) == null)
+			if (m_entityServices[nameof(concept.Tribe)](concept.Tribe) == null)
 			{
 				throw new GlobalApplicationException(
-					$"There isn't tribe - {characterInput.Tribe}",
+					$"There isn't tribe - {concept.Tribe}",
 					StatusCodes.Status400BadRequest);
 			}
-			if (m_entityServices[nameof(characterInput.Nature)](characterInput.Nature) == null)
+			if (m_entityServices[nameof(concept.Nature)](concept.Nature) == null)
 			{
 				throw new GlobalApplicationException(
-					$"There isn't nature - {characterInput.Nature}",
+					$"There isn't nature - {concept.Nature}",
+					StatusCodes.Status400BadRequest);
+			}
+		}
+
+		private void ValidateStepTwo(Attributes attributes)
+		{
+			if (attributes.Strength < 1
+				|| attributes.Dexterity < 1
+				|| attributes.Stamina < 1
+				|| attributes.Charisma < 1
+				|| attributes.Manipulation < 1
+				|| attributes.Appearance < 1
+				|| attributes.Perception < 1
+				|| attributes.Intelligence < 1
+				|| attributes.Wits < 1)
+			{
+				throw new GlobalApplicationException(
+					$"There can't be attribute with less than one point",
+					StatusCodes.Status400BadRequest);
+			}
+
+			int physicalScore = attributes.Strength + attributes.Dexterity + attributes.Stamina - 3;
+			int socialScore = attributes.Charisma + attributes.Manipulation + attributes.Appearance - 3;
+			int mentalScore = attributes.Perception + attributes.Intelligence + attributes.Wits - 3;
+			int totalScore = physicalScore + socialScore + mentalScore;
+
+			if (totalScore < 15)
+			{
+				throw new GlobalApplicationException(
+					$"Not all available points are spent",
 					StatusCodes.Status400BadRequest);
 			}
 		}

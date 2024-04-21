@@ -5,15 +5,9 @@ namespace DarkWorldChar.Model.MainModel
 	public class Character
 	{
 		[Required]
-		public string Breed { get; set; }
+		public Concept Concept { get; set; }
 
 		[Required]
-		public string Auspice { get; set; }
-
-		[Required]
-		public string Tribe { get; set; }
-
-		[Required]
-		public string Nature { get; set; }
+		public Attributes Attributes { get; set; }
 	}
 }
