@@ -43,7 +43,12 @@ namespace DarkWorldChar.Backend.Middlewares
 			context.Response.StatusCode = statusCode;
 			context.Response.ContentType = "application/json";
 
-			await context.Response.WriteAsync(JsonSerializer.Serialize(new GlobalExceptionDetails { Message = exception.Message, Trace = exception.StackTrace }));
+			await context.Response.WriteAsync(
+				JsonSerializer.Serialize(
+					new GlobalExceptionDetails
+					{
+						Message = exception.Message,
+					}));
 		}
 	}
 }

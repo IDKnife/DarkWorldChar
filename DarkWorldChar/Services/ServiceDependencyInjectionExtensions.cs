@@ -14,6 +14,7 @@ namespace DarkWorldChar.Services
 			services.AddScoped<IEntityService<Auspice>, EntityService<Auspice>>();
 			services.AddScoped<IEntityService<Nature>, EntityService<Nature>>();
 			services.AddScoped<ILocalizationService, LocalizationService>();
+			services.AddScoped<IValidateService, ValidateService>();
 
 			return services;
 		}

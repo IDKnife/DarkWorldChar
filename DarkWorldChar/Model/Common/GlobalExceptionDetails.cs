@@ -3,6 +3,5 @@
 	public class GlobalExceptionDetails
 	{
 		public string Message { get; set; }
-		public string Trace { get; set; }
 	}
 }
